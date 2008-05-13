@@ -1,0 +1,82 @@
+.TH "nf-hishape" 8
+.SH NAME
+nf-hishape \- administration tool for the nf-hishape shaping kernel module
+.SH SYNOPSIS
+.B nf-hishape -L
+.br
+.B nf-hishape -F
+.br
+.B nf-hishape -S
+file
+.br
+.B nf-hishape -i
+interface
+.br
+.B nf-hishape -a
+.br
+.B nf-hishape -p
+.br
+.B nf-hishape -f
+ip_from
+.B -t
+ip_to
+.B -l
+limit
+.SH DESCRIPTION
+.B nf-hishape
+is used to control the nf-hishape kernel module. Several ip-ranges with an according
+bandwith limit can be defined, where the ranges are not allowed to overlap.
+.SH OPTIONS
+.TP
+\fB\-L, \-\-list
+print all currently defined ip ranges and their limits
+.TP
+\fB\-F, --flush
+delete all ranges
+.TP
+\fB\-S, \-\-set\fR=\fIFILE\fR
+write ranges out of \fIFILE\fR into the module; the file format is one range per
+line, each consisting of start and end ip address as well as the limit in kbyte
+per second, all values separated by spaces.
+.TP
+\fB\-i, \-\-interface\fR=\fIDEVICE\fR
+sets the device on which the shaping should be performed (e.g. eth1)
+.TP
+\fB\-a, \-\-any_device
+perform shaping on all devices
+.TP
+\fB\-p, \-\-print_interface
+print currently used device name
+.TP
+\fB\-f, \-\-from\fR=\fIIP_ADDRESS\fR
+define the start ip address of the range that should be added; either integer or
+dotted notation
+.TP
+\fB\-t, \-\-to\fR=\fIIP_ADDRESS\fR
+define the end ip address of the range that should be added; either integer or
+dotted notation
+.TP
+\fB\-l, \-\-limit\fR=\fILIMIT\fR
+define the limit in kbyte per second of the range that should be added
+.TP
+\fB\-h, \-\-help
+print the help message
+.SH EXAMPLES
+\fBSet a total limit of 500kbyte/s:
+.br
+\fRnf-hishape -f 0.0.0.0 -t 255.255.255.255 -l 500
+.P
+\fBSet a limit of 100kbyte/s for ip 192.168.2.1:
+.br
+\fRnf-hishape -f 192.168.2.1 -t 192.168.2.1 -l 100
+.SH AUTHOR
+Written by Matthias Reif and Emmanuel Teguetio
+.SH REPORTING BUGS
+Report bugs to <matthias.reif@iupr.dfki.de>.
+.SH COPYRIGHT
+Copyright 2007-2008 Deutsches Forschungszentrum fuer Kuenstliche Intelligenz
+or its licensors, as applicable.
+.P
+This is free software.  You may redistribute copies of it under the terms  of  the  GNU
+General  Public  License <http://www.gnu.org/licenses/gpl.html>.  There is NO WARRANTY,
+to the extent permitted by law.
