@@ -1,5 +1,6 @@
 CPP_USER=g++
 CFLAGS_USER=-O3 -MMD
+EXTRA_CFLAGS=-mhard-float
 KDIR := /lib/modules/$(shell uname -r)/build
 
 obj-m := nf-hishape.o
