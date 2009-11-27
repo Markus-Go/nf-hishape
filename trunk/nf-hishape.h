@@ -19,8 +19,8 @@
  */
 
 #include <linux/ioctl.h>
-#include <linux/time.h>
-#include <linux/spinlock.h>
+//#include <linux/time.h>
+//#include <linux/spinlock.h>
 #include <linux/param.h>
 
 #define MAJOR_NUM 100

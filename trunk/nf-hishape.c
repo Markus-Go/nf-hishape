@@ -150,7 +150,7 @@ static unsigned int
     returnValue = NF_ACCEPT;
     
     // -- device depends on position of module in packet management --
-    if(hook <= NF_IP_FORWARD) {
+    if(hook <= NF_INET_FORWARD) {
         relevantDevice = indev->name;
     } else {
         relevantDevice = outdev->name;
@@ -161,7 +161,8 @@ static unsigned int
     // -- check for right device: no match => accept --
     if(relevantDevice != NULL && (device == NULL || strcmp(relevantDevice, device) == 0)) {
         // -- search according range --
-        if(search((*pskb)->nh.iph->saddr, &rangeIndex)) {
+          if(search(ip_hdr(*pskb)->saddr, &rangeIndex)) {
+        //if(search((*pskb)->nh.iph->saddr, &rangeIndex)) {
 //            spin_lock(&stats[rangeIndex].lock);
             // -- if there are packtes in the queue or bandwidth exceeded --
             if(stats[rangeIndex].queue.size > 0
@@ -197,7 +198,7 @@ static struct nf_hook_ops hishape_ops = {
     .hook = hishape_hook,
     .owner = THIS_MODULE,
     .pf = PF_INET,
-    .hooknum = NF_IP_FORWARD,
+    .hooknum = NF_INET_FORWARD,
     .priority = NF_IP_PRI_FIRST + 1
 };
 
@@ -362,17 +363,17 @@ int init_module(void) {
     // -- determine hook num --
     if(hook != NULL) {
         if(!strnicmp(hook,"pre",3))
-            hishape_ops.hooknum = NF_IP_PRE_ROUTING;
+            hishape_ops.hooknum = NF_INET_PRE_ROUTING;
         else if(!strnicmp(hook,"in",2))
-            hishape_ops.hooknum = NF_IP_LOCAL_IN;
+            hishape_ops.hooknum = NF_INET_LOCAL_IN;
         else if(!strnicmp(hook,"for",3))
-            hishape_ops.hooknum = NF_IP_FORWARD;
+            hishape_ops.hooknum = NF_INET_FORWARD;
         else if(!strnicmp(hook,"post",4))
-            hishape_ops.hooknum = NF_IP_POST_ROUTING;
+            hishape_ops.hooknum = NF_INET_POST_ROUTING;
         else if(!strnicmp(hook,"out",3))
-            hishape_ops.hooknum = NF_IP_LOCAL_OUT;
+            hishape_ops.hooknum = NF_INET_LOCAL_OUT;
         else
-            printk(KERN_INFO "Unknown hook: %s, using NF_IP_FORWARD\n", hook);
+            printk(KERN_INFO "Unknown hook: %s, using NF_INET_FORWARD\n", hook);
     }
     
     hishape_ops.priority = priority;
@@ -404,12 +405,15 @@ int init_module(void) {
 }
 
 void cleanup_module(void) {
-    int ret;
+    //int ret;
     del_timer(&timer);
     nf_unregister_hook(&hishape_ops);
-    ret = unregister_chrdev(MAJOR_NUM, DEVICE_NAME);
+    unregister_chrdev(MAJOR_NUM, DEVICE_NAME);
+    
+    /*ret = unregister_chrdev(MAJOR_NUM, DEVICE_NAME);
     if (ret < 0)
         printk(KERN_ALERT "nf-HiShape: unregister_chrdev failed: %d\n", ret);
+    */
     if(nRanges > 0) {
         vfree(ranges);
         vfree(stats);
