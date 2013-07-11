@@ -21,6 +21,10 @@
 
 #include <getopt.h>
 #include <errno.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <iostream>
+#include <string>
 
 #include "nf-hishape_util.h"
 
