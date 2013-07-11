@@ -350,7 +350,8 @@ int device_ioctl(struct inode *inode, struct file *file, unsigned int ioctl_num,
 struct file_operations ops = {
     .read = NULL,
     .write = NULL,
-    .ioctl = device_ioctl,
+    //.ioctl = device_ioctl,
+    .unlocked_ioctl = device_ioctl,
     .open = device_open,
     .release = device_release,
 };
