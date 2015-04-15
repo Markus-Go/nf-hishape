@@ -13,9 +13,9 @@
  * Project: nf-HiShape
  * File: nf-hishape.h
  * Purpose: header file for the nf-HiShape kernel module and its library/userland tool
- * Responsible: Matthias Reif
- * Primary Repository: https://svn.iupr.org/projects/nf-HiShape
- * Web Sites: www.iupr.org, www.dfki.de
+ * Responsible: Markus Goldstein
+ * Primary Repository: https://github.com/Markus-Go/nf-hishape
+ * Web Sites: www.madm.dfki.de, www.goldiges.de
  */
 
 #include <linux/ioctl.h>

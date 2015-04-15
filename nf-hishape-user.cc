@@ -11,20 +11,13 @@
  * limitations under the License.
  * 
  * Project: nf-HiShape
- * File: nf-hishape-user.c
+ * File: nf-hishape-user.cc
  * Purpose: userland tool for the nf-HiShape kernel module
- * Responsible: Matthias Reif
- * Primary Repository: https://svn.iupr.org/projects/nf-HiShape
- * Web Sites: www.iupr.org, www.dfki.de
+ * Responsible: Markus Goldstein
+ * Primary Repository: https://github.com/Markus-Go/nf-hishape
+ * Web Sites: www.madm.dfki.de, www.goldiges.de
  */
 
-
-#include <getopt.h>
-#include <errno.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <iostream>
-#include <string>
 
 #include "nf-hishape_util.h"
 

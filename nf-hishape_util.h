@@ -13,9 +13,9 @@
  * Project: nf-HiShape
  * File: nf-hishape_util.h
  * Purpose: header file containing functions for interacting with the nf-hishape kernel module 
- * Responsible: Matthias Reif
- * Primary Repository: https://svn.iupr.org/projects/nf-HiShape
- * Web Sites: www.iupr.org, www.dfki.de
+ * Responsible: Markus Goldstein
+ * Primary Repository: https://github.com/Markus-Go/nf-hishape
+ * Web Sites: www.madm.dfki.de, www.goldiges.de
  */
  
 #ifndef TEST_H_
@@ -31,6 +31,12 @@
 #include <arpa/inet.h>
 #include <errno.h>
 #include <string.h>
+#include <iostream>
+#include <unistd.h>
+#include <stdio.h>
+#include <getopt.h>
+#include <stdlib.h>
+
 
 #include "nf-hishape.h"
 

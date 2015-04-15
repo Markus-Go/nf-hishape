@@ -70,9 +70,9 @@ print the help message
 .br
 \fRnf-hishape -f 192.168.2.1 -t 192.168.2.1 -l 100
 .SH AUTHOR
-Written by Matthias Reif and Emmanuel Teguetio
+Written by Matthias Reif, Emmanuel Teguetio and Markus Goldstein
 .SH REPORTING BUGS
-Report bugs to <matthias.reif@iupr.dfki.de>.
+Report bugs to <Markus-Go@users.noreply.github.com>.
 .SH COPYRIGHT
 Copyright 2007-2008 Deutsches Forschungszentrum fuer Kuenstliche Intelligenz
 or its licensors, as applicable.
