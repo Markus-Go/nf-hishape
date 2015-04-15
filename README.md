@@ -29,6 +29,7 @@ Compilation & Installation
 --------------------------
 
 inside the source folder, type
+
     :~# make
     :~# sudo make install
     :~# sudo mknod /dev/nf-hishape c 100 0
@@ -87,7 +88,7 @@ Userland tool
 Copyright/ License/ Credits
 ---------------------------
 
-Copyright 2007-2008 Deutsches Forschungszentrum fuer Kuenstliche Intelligenz or its licensors, as applicable.
+Copyright 2007-2008 Deutsches Forschungszentrum fuer Kuenstliche Intelligenz or its licensors, as applicable.  
 Copyright 2009-2015 Markus Goldstein
 
 You may not use this file except under the terms of the accompanying license.
