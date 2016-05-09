@@ -196,7 +196,7 @@ static unsigned int
 
 static struct nf_hook_ops hishape_ops = {
     .hook = hishape_hook,
-    .owner = THIS_MODULE,
+    //.owner = THIS_MODULE,
     .pf = PF_INET,
     .hooknum = NF_INET_FORWARD,
     .priority = NF_IP_PRI_FIRST + 1
@@ -222,7 +222,7 @@ static int reserve(int n) {
             if(statsNew != NULL)
                 vfree(statsNew);
             printk(KERN_INFO "IOCTL_HISHAPE_SET_RANGES: memory allocation of %lu bytes failed :(\n", 
-                    n*sizeof(HiShapeRange) + n*sizeof(HiShapeStat));
+                    (long unsigned int)(n*sizeof(HiShapeRange) + n*sizeof(HiShapeStat)));
             return ENOMEM;
         }
     }
@@ -258,8 +258,11 @@ static int device_release(struct inode *inode, struct file *file) {
     module_put(THIS_MODULE);
     return SUCCESS;
 }
-
-int device_ioctl(struct inode *inode, struct file *file, unsigned int ioctl_num, unsigned long ioctl_param) {
+#if (LINUX_VERSION_CODE < KERNEL_VERSION(2,6,35))
+ int device_ioctl(struct inode *inode, struct file *file, unsigned int ioctl_num, unsigned long ioctl_param) { 
+#else
+ long device_ioctl(struct file *f, unsigned int ioctl_num, unsigned long ioctl_param) {
+#endif
     int i;
     int returnValue = SUCCESS;
 #ifdef DEBUG
@@ -350,8 +353,11 @@ int device_ioctl(struct inode *inode, struct file *file, unsigned int ioctl_num,
 struct file_operations ops = {
     .read = NULL,
     .write = NULL,
-    //.ioctl = device_ioctl,
+#if (LINUX_VERSION_CODE < KERNEL_VERSION(2,6,35))
+    .ioctl = device_ioctl,
+#else
     .unlocked_ioctl = device_ioctl,
+#endif
     .open = device_open,
     .release = device_release,
 };
@@ -363,15 +369,15 @@ int init_module(void) {
     
     // -- determine hook num --
     if(hook != NULL) {
-        if(!strnicmp(hook,"pre",3))
+        if(!strncasecmp(hook,"pre",3))
             hishape_ops.hooknum = NF_INET_PRE_ROUTING;
-        else if(!strnicmp(hook,"in",2))
+        else if(!strncasecmp(hook,"in",2))
             hishape_ops.hooknum = NF_INET_LOCAL_IN;
-        else if(!strnicmp(hook,"for",3))
+        else if(!strncasecmp(hook,"for",3))
             hishape_ops.hooknum = NF_INET_FORWARD;
-        else if(!strnicmp(hook,"post",4))
+        else if(!strncasecmp(hook,"post",4))
             hishape_ops.hooknum = NF_INET_POST_ROUTING;
-        else if(!strnicmp(hook,"out",3))
+        else if(!strncasecmp(hook,"out",3))
             hishape_ops.hooknum = NF_INET_LOCAL_OUT;
         else
             printk(KERN_INFO "Unknown hook: %s, using NF_INET_FORWARD\n", hook);

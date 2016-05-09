@@ -22,11 +22,16 @@
 //#include <linux/time.h>
 //#include <linux/spinlock.h>
 #include <linux/param.h>
+#include <linux/version.h>
 
 #define MAJOR_NUM 100
 #define RAND_MAX_VALUE 255
 #define N_RAND 1000
 #define MAX_DEVICE_LENGTH 256
+
+#if LINUX_VERSION_CODE < KERNEL_VERSION(4,0,0)
+#define strncasecmp strnicmp
+#endif
 
 // 250 - 4
 // 500 - 2
