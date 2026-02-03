@@ -1,7 +1,9 @@
+**⚠️WARNING: This repository is not maintained any more, development has been discontinued. ⚠️**
+
 nf-HiShape
 ==========
 
-nf-HiShape is a kernel module for traffic shaping according to the source IP 
+nf-HiShape is a kernel module (for Linux kernel up to 3.2) for traffic shaping according to the source IP 
 address. It limits the bandwidth usage of user-defined IP-address ranges and was implemented by the constraint of high-performance operation as well as easy usage.
 
 The package includes the module itself and a user-land tool for its configuration.
@@ -102,4 +104,5 @@ limitations under the License.
 This is free software. Licensed under the [GNU GPL, Version 3.0](LICENSE).  
 There is NO WARRANTY, to the extent permitted by law.
 
-![http://madm.dfki.de/lib/tpl/dfki/images/logo.jpg](http://madm.dfki.de/lib/tpl/dfki/images/logo.jpg)  
+<a href="http://www.dfki.de/" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/de/8/88/Deutsches_Forschungszentrum_f%C3%BCr_K%C3%BCnstliche_Intelligenz_logo.svg" height="80"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+[![https://www.goldiges.de/assets/images/logo-full.png](https://www.goldiges.de/assets/images/logo-full.png)](https://www.goldiges.de/)
